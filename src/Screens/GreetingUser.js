@@ -21,7 +21,7 @@ export default class GreetingUser extends Component {
               title='PayLive'
               titleStyle={{fontSize: 45, marginBottom: 70, color: '#4E3C86'}}
               imageStyle={{marginTop: 50}}
-              image={require('../assets/greeting1.png')} >
+              image={require('../Assets/greeting1.png')} >
                 <Text style={{fontSize: 15, color: '#3F458E', textAlign: 'center', fontWeight: 'bold', marginTop: 20}}>Hai, selamat bergabung di PayLive!</Text>
                 <Text style={{fontSize: 15, color: '#3F458E', textAlign: 'center', marginTop: 20}}>Kini transaksi lebih mudah dengan PayLive</Text>
             </Card>
@@ -30,7 +30,7 @@ export default class GreetingUser extends Component {
               title='PayLive'
               titleStyle={{fontSize: 45, marginBottom: 70, color: '#4E3C86'}}
               imageStyle={{marginTop: 50}}
-              image={require('../assets/greeting2.png')} >
+              image={require('../Assets/greeting2.png')} >
                 <Text style={{fontSize: 15, color: '#3F458E', textAlign: 'center', fontWeight: 'bold', marginTop: 20}}>Anda Bisa Atur Keuangan Dengan Tepat</Text>
                 <Text style={{fontSize: 15, color: '#3F458E', textAlign: 'center', marginTop: 20}}>Tidak ada kebocoran keuangan karena sudah memiliki perencanaan dan dan bisa melihat riwayat </Text>
                 <TouchableOpacity style={styles.btn} onPress={this.changeScreenToLogin}>

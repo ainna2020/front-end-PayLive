@@ -3,31 +3,36 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { Input } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { CheckBox } from 'react-native-elements'
+import { Register} from '../Redux/Actions/ActionsAuth'
+import { connect } from 'react-redux'
 
 
 const { width: WIDTH } = Dimensions.get('window')
-export default class JoinPayLive extends Component {
+
+class JoinPayLive extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      nama: '',
-      namaError: null,
+      fullname: '',
+      fullnameError: null,
       email: '',
       error: null,
       emailError: null,
       phone: 0,
       phoneError: null,
+      isLoading: false,
       activeBtn : true,
       checked : false,
       styleBtn : styles.disabledBtn
+
     }
     this.checkname = () => {
       let req = /^[a-zA-Z]+$/
-      console.log(req.test(this.state.nama))
-      if (!req.test(this.state.nama)) {
-        this.setState({ namaError: 'Nama anda salah' })
+      console.log(req.test(this.state.fullname))
+      if (!req.test(this.state.fullname)) {
+        this.setState({ fullnameError: 'Nama anda salah' })
       } else {
-        this.setState({ namaError: null })
+        this.setState({ fullnameError: null })
       }
     }
     this.checkphone = () => {
@@ -56,6 +61,25 @@ export default class JoinPayLive extends Component {
         activeBtn : !this.state.activeBtn
       })
     }
+    this.code = code => {
+      this.setState ({ code })
+    }
+
+    this.submitData = () => {
+      this.setState({ isLoading: true})
+      const data = {
+        fullname: this.state.fullname,
+        phone: this.state.phone,
+        email: this.state.email
+      }
+      console.log('register', data)
+      this.props.Register(data)
+      if(this.props.register.success === true) {
+        this.props.navigation.navigate('CodeOTP', {code: () => this.code(code)} )
+      } else {
+        ToastAndroid.show('Register anda tidak berhasil, pastikan memasukkan data dengan benar', ToastAndroid.SHORT)
+      }
+    }
     this.changeScreenToCodeOTP= () => {
       this.props.navigation.navigate('CodeOTP')
     }
@@ -64,6 +88,9 @@ export default class JoinPayLive extends Component {
     }
   }
 
+  componentDidMount (){
+    console.log('ya Allah mudahkanlah',this.props.register)
+  }
   render() {
     console.disableYellowBox = true
     return (
@@ -78,11 +105,11 @@ export default class JoinPayLive extends Component {
             inputStyle={{ fontSize: 15 }}
             label='Nama Lengkap'
             labelStyle={{ color: 'black', fontSize: 12 }}
-            onChangeText={text => this.setState({ nama: text })}
+            onChangeText={(text) => this.setState({ fullname: text})}
             onBlur={() => this.checkname()}
             errorStyle={{ color: 'red' }}
             errorMessage={
-              !this.state.namaError ? false : 'Nama harus mengandung alphabet'
+              !this.state.fullnameError ? false : 'Nama harus mengandung alphabet'
             }
           />
           <Input style={styles.inputText}
@@ -112,7 +139,6 @@ export default class JoinPayLive extends Component {
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <CheckBox
             onPress = {this.checkButton}
-            // title={}
             checked={this.state.checked}
             CheckBox={{color: '48387E'}}
           />
@@ -123,7 +149,7 @@ export default class JoinPayLive extends Component {
           
           </View>
         </View>
-        <TouchableOpacity disabled={this.state.activeBtn} style={this.state.activeBtn ? styles.disabledBtn : styles.btn} onPress={this.changeScreenToCodeOTP}>
+        <TouchableOpacity disabled={this.state.activeBtn} style={this.state.activeBtn ? styles.disabledBtn : styles.btn} onPress={this.submitData}>
           <Text>Berikutnya</Text>
         </TouchableOpacity>
       </View>
@@ -169,5 +195,10 @@ const styles = StyleSheet.create({
     color: '#1e90ff',
     fontWeight: 'bold'
   }
-
 })
+
+const mapStateToProps = (state) => ({
+  register: state.auth.isRegister
+})
+
+export default connect(mapStateToProps, {Register})(JoinPayLive)

@@ -81,6 +81,7 @@ target 'PayLiveNative' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+
   target 'PayLiveNativeTests' do
     inherit! :complete
     # Pods for testing

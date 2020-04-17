@@ -27,6 +27,7 @@ export default class SecurityCode extends Component {
           style={{alignSelf: 'center', fontSize: 40}}
           keyboardType='phone-pad'
           placeholder='_ _ _ _ _ _'
+          onChangeText={() => this.setState({})}
           >
           </TextInput>
         </View>

@@ -2,20 +2,41 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import { Form, Item, Input, Label } from 'native-base';
 import IconUser from 'react-native-vector-icons/EvilIcons'
+import { isLogin} from '../Redux/Actions/ActionsAuth'
+import {connect} from 'react-redux'
 
 
 
 const { width: WIDTH } = Dimensions.get('window')
-export default class LoginScreen extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
       phone: 0,
       phoneError: null
+
     }
-    this.changeScreenToJoin = () => {
-      this.props.navigation.navigate('Join PayLive')
+    this.submitData = () => {
+      this.setState({ isLoading: true})
+      const data = {
+        securityCode: this.state.securityCode
+      }
+      console.log(data, 'login')
+      this.props.isLogin(data)
     }
+    
+
+    // this.submitData = () => {
+    //   this.setState({ isLoading: true })
+    //   const data = {
+    //     username: this.state.username,
+    //     password: this.state.password,
+    //   }
+    //   console.log(data, 'HALE')
+    //   this.props.isLogin(data)
+    // this.changeScreenToJoin = () => {
+    //   this.props.navigation.navigate('Join PayLive')
+    // }
     this.checkphone = () => {
       console.log('jajaja')
       let req = /^(^\+62\s?|^0)(\d{3,4}?){2}\d{3,4}$/
@@ -26,7 +47,7 @@ export default class LoginScreen extends Component {
         this.setState({ phoneError: null })
       }
     }
-  }
+}
   render() {
     console.disableYellowBox=true
     return (
@@ -113,8 +134,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-
-
 })
 
+const mapStateToProps = (state) => ({
+  login: state.login.isLogin
+})
 
+export default connect(mapStateToProps, { isLogin })(LoginScreen)
