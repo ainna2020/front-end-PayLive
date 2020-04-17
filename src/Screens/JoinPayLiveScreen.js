@@ -64,7 +64,7 @@ class JoinPayLive extends Component {
     this.code = code => {
       this.setState ({ code })
     }
-
+console.log('q')
     this.submitData = () => {
       this.setState({ isLoading: true})
       const data = {
