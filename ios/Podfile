@@ -81,6 +81,10 @@ target 'PayLiveNative' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+<<<<<<< HEAD
+=======
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+>>>>>>> refs/remotes/origin/dev
 
   target 'PayLiveNativeTests' do
     inherit! :complete

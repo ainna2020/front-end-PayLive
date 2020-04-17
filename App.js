@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+<<<<<<< HEAD
 
 // import screen
 import Login from './src/Screens/LoginScreen'
@@ -18,6 +19,16 @@ import {PersistGate} from 'redux-persist/integration/react'
 import { store, persistor} from './src/Redux/Store'
 import { connect} from 'react-redux'
 
+=======
+import Login from './src/Screen/LoginScreen'
+import Join from './src/Screen/JoinPayLiveScreen'
+import SKKP from './src/Screen/SKKPScreen'
+import SecurityCode from './src/Screen/SecurityCode'
+import LupaSecurityCode from './src/Screen/LupaSecurityCode'
+import CodeOTP from './src/Screen/CodeOTPScreen'
+import GreetingUser from './src/Screen/GreetingUser'
+import BottomStack from './src/Screen/BottomStack'
+>>>>>>> refs/remotes/origin/dev
 const Stack = createStackNavigator()
 
 
@@ -45,3 +56,4 @@ export default class App extends Component {
     )
   }
 }
+
